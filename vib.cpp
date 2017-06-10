@@ -88,14 +88,14 @@ int main()
 	
 	for (int i=0; i<Natom*3; i++)
 	{
-		if (i !=0 && i % Natom == 0)
+		if (i !=0 && i % 3  == 0)
 			first++;
 		int second=0;
 		for (int j=0; j<Natom*3;j++)
 		{
 			cout<<first<<second<<" ";
 			hessian(i,j)/=(sqrt(mass[int(Zval[first])]*mass[int(Zval[second])]));
-			hessian(i,j)*=100000*15.82;
+		//	hessian(i,j)*=100000*15.82;
 			if (j != 0 && (j+1) % 3 == 0)
 				second++;
 		}
@@ -111,16 +111,21 @@ int main()
 	arma::cx_mat eigvec;
 	arma::eig_gen(eigval,eigvec,hessian);
 	arma::vec eigval1=arma::sort(real(eigval));
-	eigval1.print("\nThe eigenvalues of the Hessian are:");
-	eigval1=eigval1/(2.0*3.14*3*1e8);
+	eigval1.print("\nThe eigenvalues of the Hessian are: (in Hartree/amu-bohr^2)");
+	
+/************************************************************************************/
+//Computing the Harmonic Vibrational Frequencies
+/************************************************************************************/
+	
+	
+	cout<<"\n The Harmonic vibrational frequencies are (in cm-1)";
+	eigval1=sqrt(eigval1)/(2.0*3.14);
 	cout<<endl;
 	eigval1.print();
 
 
-/************************************************************************************/
-//Computing the Harmonic Vibrational Frequencies
-/************************************************************************************/
-		
+
+
 	cout<<"\nNote that there are only three zero frequencies in this case when there \n"
 		"should be six. This is because the structure used in the computation is \n"
 		"not a stationary point on the potential energy surface, and thus the three \n"
