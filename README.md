@@ -6,4 +6,7 @@ To COMPILE USE THIS IN THIS SEQUENTIAL ORDER: (main file name should always come
 
 g++ -std=c++0x -g -o RunFileName Mainfile.cpp -larmadillo -llapack -lblas -Wall 
 
+Or Use the included Makefile
+
 Details: http://sirius.chem.vt.edu/wiki/doku.php?id=crawdad:programming:project2
+
